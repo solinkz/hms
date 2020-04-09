@@ -8,12 +8,14 @@ $fname=$_POST['fname'];
 $mname=$_POST['mname'];
 $lname=$_POST['lname'];
 $gender=$_POST['gender'];
+$dept=$_POST['dept'];
+$level=$_POST['level'];
 $contactno=$_POST['contact'];
 $emailid=$_POST['email'];
 $password=$_POST['password'];
-$query="insert into  userRegistration(regNo,firstName,middleName,lastName,gender,contactNo,email,password) values(?,?,?,?,?,?,?,?)";
+$query="insert into  userRegistration(regNo,firstName,middleName,lastName,gender,contactNo,email,password,department,level) values(?,?,?,?,?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($query);
-$rc=$stmt->bind_param('sssssiss',$regno,$fname,$mname,$lname,$gender,$contactno,$emailid,$password);
+$rc=$stmt->bind_param('sssssissss',$regno,$fname,$mname,$lname,$gender,$contactno,$emailid,$password,$dept,$level);
 $stmt->execute();
 echo"<script>alert('Student Succssfully register');</script>";
 }
@@ -112,6 +114,23 @@ return true;
 <option value="female">Female</option>
 <option value="others">Others</option>
 </select>
+</div>
+</div>
+
+
+
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Department : </label>
+<div class="col-sm-8">
+<input type="text" name="dept" id="dept"  class="form-control" required="required">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Level: </label>
+<div class="col-sm-8">
+<input type="num" name="level" id="level"  class="form-control" required="required">
 </div>
 </div>
 

@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 include('includes/config.php');
 include('includes/checklogin.php');
@@ -6,6 +6,39 @@ include('check_availability.php');
 check_login();
 //code for registration
 
+
+
+// check to make sure hostel is full or not
+
+$query = 'SELECT * FROM rooms';
+$stmt= $mysqli->prepare($query) ;
+$stmt->execute() ;//ok
+$result_rooms=$stmt->get_result();
+
+while ($row = $result_rooms->fetch_object()) {
+	
+	// pick out booking info for each room
+	$innerquery = 'SELECT room_no, count(*) FROM booking WHERE room_no =?';
+	$stmt = $mysqli->prepare($innerquery);
+	$stmt->bind_param('i',$row->room_no);
+	$stmt->execute();
+
+	$rt = $stmt->get_result();
+
+	while($row = $rt->fetch_assoc()){
+		if($row['count(*)'] == 2){
+			$roomquery = 'UPDATE rooms SET full = 1 where room_no = ?';
+			$stmt = $mysqli->prepare($roomquery);
+			$stmt->bind_param('i',$row['room_no']);
+			$stmt->execute();
+
+		}
+	}
+
+
+
+
+}
 
 
 
@@ -21,26 +54,34 @@ if(isset($_POST['submit'])){
 	$stmt->execute() ;//ok
 	$res=$stmt->get_result();
 	$dept = '';
+	$gender='';
 	while($row = $res->fetch_object()){
 		$dept = $row->department;
+		$gender = $row->gender;
+
+		// var_dump($dept);
+
 	}
+	// die();
 	
 
 	// check if room is available
-	$query = 'SELECT * FROM rooms WHERE seater =?';
+	$query = 'SELECT * FROM rooms WHERE seater =? AND type="'.$gender.'"';
 	$stmt= $mysqli->prepare($query) ;
 	$stmt->bind_param('i',$seat);
 	$stmt->execute() ;//ok
 	$res=$stmt->get_result();
 
+	var_dump($gender);
 	while($row = $res->fetch_object()){
 
 		
 
 
-		if($row->full == 0 && $row->department == $dept || $row->department == ''){
+			// print_r($row->seater. ' | '.$row->department.' | '.$row->room_no.' | '.$row->type.' --- ');
+		if($row->full == 0 && ($row->department == $dept || $row->department == '')){
 			
-			$query = 'INSERT INTO booking(room_no, student_id) VALUES(?,?)';
+			$query = 'INSERT INTO booking(room_no, student_id,staying_from) VALUES(?,?,now())';
 			$stmt = $mysqli->prepare($query);
 			$stmt->bind_param('ss',$row->room_no , $id);
 			$stmt->execute();
@@ -55,9 +96,14 @@ if(isset($_POST['submit'])){
 			header("location:room-details.php");
 			break;
 
+		}else{
+			echo "<script> alert('room with ". $seat . " seat for your department currently not available. Pls select another room type');</script>";
+			break;
+
 		}
 
 	}
+			// die();	
 
 
 }

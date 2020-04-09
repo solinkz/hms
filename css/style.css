@@ -545,7 +545,7 @@ li {
   border-bottom: 1px solid #f0f0f0;
 }
 .brand {
-  background: #3e454c;
+  background: #111111;
   position: relative;
   z-index: 3;
   position: fixed;
@@ -558,6 +558,11 @@ li {
   float: left;
   display: block;
   width: 200px;
+  color: #ffffff;
+}
+.brand .logo:hover{
+  font-weight: bold;
+  color: #fff;
 }
 @media only screen and (min-width: 992px) {
   .brand .logo {
@@ -612,7 +617,7 @@ li {
 }
 .brand .ts-profile-nav .ts-account > a {
   width: 180px;
-  background: #2c3136;
+  background: transparent;
 }
 .brand .ts-profile-nav .ts-account .ts-avatar {
   border-radius: 50%;
@@ -640,7 +645,7 @@ li {
   background-color: #b4b4b4;
 }
 .ts-sidebar {
-  background: #2c3136;
+  background: #2a2535;
   max-height: 0;
   transition: max-height 0.3s;
   overflow: hidden;
@@ -684,16 +689,26 @@ li {
 .ts-sidebar-menu a {
   display: block;
   text-decoration: none;
-  padding: 12px 15px;
-  color: #fff;
+  padding: 1.2rem 1rem;
+  color: rgba(255,255,255,.6);
+}
+
+.ts-sidebar-menu a:hover{
+  color:#fff;
 }
 .ts-sidebar-menu li {
   position: relative;
 }
 .ts-sidebar-menu li i {
-  color: #585c64;
+  color: rgba(255,255,255,.6);
   margin-right: 10px;
 }
+.ts-sidebar-menu li:hover i {
+  color: #fff;
+ 
+}
+
+
 .ts-sidebar-menu li ul {
   display: block;
   background: rgba(255, 0, 0, 0.12);
@@ -728,7 +743,7 @@ li {
 }
 .ts-main-content .content-wrapper {
   padding-top: 15px;
-  margin-top: 20px;
+  margin-top: 4rem;
 }
 @media only screen and (min-width: 992px) {
   .ts-main-content .ts-sidebar {

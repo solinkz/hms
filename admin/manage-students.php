@@ -7,7 +7,7 @@ check_login();
 if(isset($_GET['del']))
 {
 	$id=intval($_GET['del']);
-	$adn="delete from registration where id=?";
+	$adn="delete from userregistration where id=?";
 		$stmt= $mysqli->prepare($adn);
 		$stmt->bind_param('i',$id);
         $stmt->execute();
@@ -89,7 +89,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 									<tbody>
 <?php	
 $aid=$_SESSION['id'];
-$ret="select * from registration";
+$ret='SELECT * FROM userregistration JOIN booking on booking.student_id = userregistration.id JOIN rooms on booking.room_no = rooms.room_no ';
 $stmt= $mysqli->prepare($ret) ;
 //$stmt->bind_param('i',$aid);
 $stmt->execute() ;//ok
@@ -99,12 +99,12 @@ while($row=$res->fetch_object())
 	  {
 	  	?>
 <tr><td><?php echo $cnt;;?></td>
-<td><?php echo $row->firstName;?><?php echo $row->middleName;?><?php echo $row->lastName;?></td>
-<td><?php echo $row->regno;?></td>
-<td><?php echo $row->contactno;?></td>
-<td><?php echo $row->roomno;?></td>
-<td><?php echo $row->seater;?></td>
-<td><?php echo $row->stayfrom;?></td>
+<td><?=$row->firstName.' '.$row->middleName.' '.$row->lastName?></td>
+<td><?=$row->regNo?></td>
+<td><?=$row->contactNo?></td>
+<td><?=$row->room_no?></td>
+<td><?=$row->seater?></td>
+<td><?=$row->staying_from;?></td>
 <td>
 <a href="javascript:void(0);"  onClick="popUpWindow('http://localhost/hostel/admin/full-profile.php?id=<?php echo $row->id;?>');" title="View Full Details"><i class="fa fa-desktop"></i></a>&nbsp;&nbsp;
 <a href="manage-students.php?del=<?php echo $row->id;?>" title="Delete Record" onclick="return confirm("Do you want to delete");"><i class="fa fa-close"></i></a></td>

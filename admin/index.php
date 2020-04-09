@@ -51,12 +51,12 @@ $stmt=$mysqli->prepare("SELECT username,email,password,id FROM admin WHERE (user
 </head
 <body>
 
-	<div class="login-page bk-img" style="background-image: url(img/login-bg.jpg);">
+	<div class="login-page bk-img" style="background-image: linear-gradient(to right, rgba(0,0,0,.7) , rgba(0,0,0,.7)) ,url(img/login-bg.jpg);">
 		<div class="form-content">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-md-offset-3">
-						<h1 class="text-center text-bold text-light mt-4x">Hostel Management System</h1>
+						<h1 class="text-center text-bold text-light mt-4x">ABUAD HOSTEL MANGEMENT SYSTEM</h1>
 						<div class="well row pt-2x pb-3x bk-light">
 							<div class="col-md-8 col-md-offset-2">
 

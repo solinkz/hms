@@ -51,7 +51,7 @@ check_login();
 												<div class="stat-panel text-center">
 
 <?php
-$result ="SELECT count(*) FROM registration ";
+$result ="SELECT count(*) FROM userregistration ";
 $stmt = $mysqli->prepare($result);
 $stmt->execute();
 $stmt->bind_result($count);
@@ -59,7 +59,7 @@ $stmt->fetch();
 $stmt->close();
 ?>
 
-													<div class="stat-panel-number h1 "><?php echo $count;?></div>
+													<div class="stat-panel-number h1 "><?= $count?></div>
 													<div class="stat-panel-title text-uppercase"> Students</div>
 												</div>
 											</div>
@@ -90,18 +90,18 @@ $stmt1->close();
 											<div class="panel-body bk-info text-light">
 												<div class="stat-panel text-center">
 <?php
-$result2 ="SELECT count(*) FROM courses ";
+$result2 ="SELECT count(*) FROM booking ";
 $stmt2 = $mysqli->prepare($result2);
 $stmt2->execute();
 $stmt2->bind_result($count2);
 $stmt2->fetch();
 $stmt2->close();
 ?>
-													<div class="stat-panel-number h1 "><?php echo $count2;?></div>
-													<div class="stat-panel-title text-uppercase">Total Courses</div>
+													<div class="stat-panel-number h1 "><?= $count2;?></div>
+													<div class="stat-panel-title text-uppercase">Rooms booked</div>
 												</div>
 											</div>
-											<a href="manage-courses.php" class="block-anchor panel-footer text-center">See All &nbsp; <i class="fa fa-arrow-right"></i></a>
+											<a href="#" class="block-anchor panel-footer text-center">See All &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
 
@@ -157,11 +157,6 @@ $stmt2->close();
 
 </body>
 
-<div class="foot"><footer>
-<p> Brought To You By <a href="https://code-projects.org/">Code-Projects</p>
-</footer> </div>
 
-
-<style> .foot{text-align: center; border: 1px solid black;}</style>
 
 </html>
